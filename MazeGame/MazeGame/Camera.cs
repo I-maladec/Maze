@@ -19,13 +19,14 @@ namespace MazeGame
             gameObjects = Master.World.GetWorld();
             for(int i = 0; i < Master.World.worldSize.y; i++)
             {
-                for(int j = 0; j < Master.World.worldSize.x; i++)
+                for(int j = 0; j < Master.World.worldSize.x; j++)
                 {
-                    if(gameObjects[i * Master.World.worldSize.x + j] != null)
+                    int a = i * Master.World.worldSize.x + j;
+                    if (gameObjects[a] != null)
                     {
-                        if (gameObjects[i * Master.World.worldSize.x + j].GetComponent<CharRenderer> != null)
+                        if (gameObjects[a].GetComponent<CharRenderer> != null)
                         {
-                            line += gameObjects[i * Master.World.worldSize.x + j].GetComponent<CharRenderer>().skin;
+                            line += gameObjects[a].GetComponent<CharRenderer>().skin;
                         }
                         else line += " ";
                     }
@@ -34,6 +35,7 @@ namespace MazeGame
                 Console.WriteLine(line);
                 line = "";
             }
+            Console.Clear();
         }
     }
 }

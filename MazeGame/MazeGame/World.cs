@@ -16,6 +16,7 @@ namespace MazeGame
         }
         public void ClearWorld()
         {
+
             gameObjects = new GameObject[100];
         }
         public GameObject[] GetWorld()

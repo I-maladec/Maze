@@ -31,6 +31,7 @@ namespace MazeGame
                 {
                     CycleMaster.components[j].Update();
                 }
+                CycleMaster.gameObjects[i].Update();
             }
             World.ClearWorld();
         }
@@ -43,6 +44,7 @@ namespace MazeGame
                 {
                     CycleMaster.components[j].Start();
                 }
+                CycleMaster.gameObjects[i].Start();
             }
         }
         static void Instantiate(string name, List<Component> components)
