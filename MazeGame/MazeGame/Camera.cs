@@ -16,10 +16,15 @@ namespace MazeGame
         }
         public override void Update()
         {
+
+        }
+        public void Render()
+        {
+            Console.Clear();
             gameObjects = Master.World.GetWorld();
-            for(int i = 0; i < Master.World.worldSize.y; i++)
+            for (int i = 0; i < Master.World.worldSize.y; i++)
             {
-                for(int j = 0; j < Master.World.worldSize.x; j++)
+                for (int j = 0; j < Master.World.worldSize.x; j++)
                 {
                     int a = i * Master.World.worldSize.x + j;
                     if (gameObjects[a] != null)
@@ -35,7 +40,7 @@ namespace MazeGame
                 Console.WriteLine(line);
                 line = "";
             }
-            Console.Clear();
+            Thread.Sleep(10);
         }
     }
 }

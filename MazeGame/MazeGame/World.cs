@@ -8,8 +8,8 @@ namespace MazeGame
 {
     internal class World
     {
-        public Vector2int worldSize = new Vector2int(10, 10); // временное решение
-        private GameObject[] gameObjects = new GameObject[100];
+        public Vector2int worldSize = new Vector2int(50, 50); // временное решение
+        private GameObject[] gameObjects = new GameObject[2500];
         public void InsertGameObject(GameObject gameObject, Vector2int position)
         { 
             gameObjects[position.y*worldSize.x+position.x] = gameObject;
@@ -17,7 +17,7 @@ namespace MazeGame
         public void ClearWorld()
         {
 
-            gameObjects = new GameObject[100];
+            gameObjects = new GameObject[2500];
         }
         public GameObject[] GetWorld()
         {

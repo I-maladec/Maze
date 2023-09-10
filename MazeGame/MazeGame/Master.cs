@@ -10,20 +10,25 @@ namespace MazeGame
     {
         public static Master CycleMaster = new Master();
         public static World World = new World();
+        public static InputManager InputManager = new InputManager();
+        private static Camera camera;
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<Component> components = new List<Component>();
         static void Main()
         {
-            Instantiate("camera", new List<Component> {new Camera()});
-            Instantiate("player", new List<Component> { new Transform(new Vector2int(1, 1)), new CharRenderer('@') });
+            camera = Instantiate("camera", new List<Component> {new Camera()}).GetComponent<Camera>();
+            Instantiate("player", new List<Component> { new Transform(new Vector2int(1, 1)), new CharRenderer('@'), new PlayerControl() });
             MasterStart();
             while(true)
             {
+                InputManager.Input();
                 MasterUpdate();
+                camera.Render();
             }
         }
         static void MasterUpdate()
         {
+            World.ClearWorld();
             for (int i = 0; i < CycleMaster.gameObjects.Count; i++)
             {
                 CycleMaster.components = CycleMaster.gameObjects[i].GetComponents();
@@ -33,27 +38,30 @@ namespace MazeGame
                 }
                 CycleMaster.gameObjects[i].Update();
             }
-            World.ClearWorld();
         }
         static void MasterStart()
         {
             for (int i = 0; i < CycleMaster.gameObjects.Count; i++)
             {
+                CycleMaster.gameObjects[i].Start();
                 CycleMaster.components = CycleMaster.gameObjects[i].GetComponents();
                 for (int j = 0; j < CycleMaster.gameObjects[i].GetComponents().Count; j++)
                 {
                     CycleMaster.components[j].Start();
                 }
-                CycleMaster.gameObjects[i].Start();
             }
         }
-        static void Instantiate(string name, List<Component> components)
+        static GameObject Instantiate(string name, List<Component> components)
         {
-            CycleMaster.gameObjects.Add(new GameObject(name, components));
+            GameObject gameObject = new GameObject(name, components);
+            CycleMaster.gameObjects.Add(gameObject);
+            return gameObject;
         }
-        static void Instantiate(string name)
+        static GameObject Instantiate(string name)
         {
-            CycleMaster.gameObjects.Add(new GameObject(name));
+            GameObject gameObject = new GameObject(name);
+            CycleMaster.gameObjects.Add(gameObject);
+            return gameObject;
         }
     }
 }

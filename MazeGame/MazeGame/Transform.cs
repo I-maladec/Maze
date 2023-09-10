@@ -21,5 +21,10 @@ namespace MazeGame
         {
             this.position = position;
         }
+        public void Translate(Vector2int transition)
+        {
+            position.x += transition.x;
+            position.y += transition.y;
+        }
     }
 }
