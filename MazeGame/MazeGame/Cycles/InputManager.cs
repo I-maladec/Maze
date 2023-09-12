@@ -11,7 +11,7 @@ namespace MazeGame
         public ConsoleKey pressedKey;
         public void Input()
         {
-            pressedKey = Console.ReadKey().Key;
+            pressedKey = Console.ReadKey(true).Key;
         }
     }
 }

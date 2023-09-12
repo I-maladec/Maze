@@ -8,7 +8,7 @@ namespace MazeGame
 {
     internal class Master
     {
-        public static Master CycleMaster = new Master();
+        public static Master GameMaster = new Master();
         public static World World = new World();
         public static InputManager InputManager = new InputManager();
         private static Camera camera;
@@ -18,6 +18,7 @@ namespace MazeGame
         {
             camera = Instantiate("camera", new List<Component> {new Camera()}).GetComponent<Camera>();
             Instantiate("player", new List<Component> { new Transform(new Vector2int(1, 1)), new CharRenderer('@'), new PlayerControl() });
+            Build.BuildFrame(new Vector2int(0, 0), new Vector2int(50, 50), new GameObject("wall", new List<Component> { new CharRenderer('#'), new Solid()}));
             MasterStart();
             while(true)
             {
@@ -29,38 +30,43 @@ namespace MazeGame
         static void MasterUpdate()
         {
             World.ClearWorld();
-            for (int i = 0; i < CycleMaster.gameObjects.Count; i++)
+            for (int i = 0; i < GameMaster.gameObjects.Count; i++)
             {
-                CycleMaster.components = CycleMaster.gameObjects[i].GetComponents();
-                for(int j = 0; j < CycleMaster.gameObjects[i].GetComponents().Count; j++)
+                GameMaster.components = GameMaster.gameObjects[i].GetComponents();
+                for(int j = 0; j < GameMaster.gameObjects[i].GetComponents().Count; j++)
                 {
-                    CycleMaster.components[j].Update();
+                    GameMaster.components[j].Update();
                 }
-                CycleMaster.gameObjects[i].Update();
+                GameMaster.gameObjects[i].Update();
             }
         }
         static void MasterStart()
         {
-            for (int i = 0; i < CycleMaster.gameObjects.Count; i++)
+            for (int i = 0; i < GameMaster.gameObjects.Count; i++)
             {
-                CycleMaster.gameObjects[i].Start();
-                CycleMaster.components = CycleMaster.gameObjects[i].GetComponents();
-                for (int j = 0; j < CycleMaster.gameObjects[i].GetComponents().Count; j++)
+                GameMaster.gameObjects[i].Start();
+                GameMaster.components = GameMaster.gameObjects[i].GetComponents();
+                for (int j = 0; j < GameMaster.gameObjects[i].GetComponents().Count; j++)
                 {
-                    CycleMaster.components[j].Start();
+                    GameMaster.components[j].Start();
                 }
             }
         }
-        static GameObject Instantiate(string name, List<Component> components)
+        public static GameObject Instantiate(string name, List<Component> components)
         {
             GameObject gameObject = new GameObject(name, components);
-            CycleMaster.gameObjects.Add(gameObject);
+            GameMaster.gameObjects.Add(gameObject);
             return gameObject;
         }
-        static GameObject Instantiate(string name)
+        public static GameObject Instantiate(string name)
         {
             GameObject gameObject = new GameObject(name);
-            CycleMaster.gameObjects.Add(gameObject);
+            GameMaster.gameObjects.Add(gameObject);
+            return gameObject;
+        }
+        public static GameObject Instantiate(GameObject gameObject)
+        {
+            GameMaster.gameObjects.Add(gameObject);
             return gameObject;
         }
     }

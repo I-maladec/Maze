@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+#nullable enable
 
 namespace MazeGame
 {
@@ -29,9 +30,10 @@ namespace MazeGame
         {
 
         }
-        public void AddComponent(Component component)
+        public GameObject AddComponent(Component component)
         {
             components.Add(component);
+            return this;
         }
         public GameObject(string name, List<Component> components)
         {

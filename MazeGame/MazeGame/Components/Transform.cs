@@ -23,8 +23,18 @@ namespace MazeGame
         }
         public void Translate(Vector2int transition)
         {
-            position.x += transition.x;
-            position.y += transition.y;
+            if(Master.World.GetGameObject(new Vector2int(position.x += transition.x, position.y += transition.y))!=null)
+            {
+                if(Master.World.GetGameObject(new Vector2int(position.x += transition.x, position.y += transition.y)).GetComponent<Solid>()==null)
+                {
+                    position.x += transition.x;
+                    position.y += transition.y;
+                }
+            }
+            if(position.x < 0)
+                position.x = 0;
+            if (position.y < 0)
+                position.y = 0;
         }
     }
 }

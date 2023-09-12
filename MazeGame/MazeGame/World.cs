@@ -14,6 +14,15 @@ namespace MazeGame
         { 
             gameObjects[position.y*worldSize.x+position.x] = gameObject;
         }
+        public GameObject GetGameObject(Vector2int position)
+        {
+            int a = position.y * worldSize.x + position.x;
+            if (gameObjects[position.y * worldSize.x + position.x] != null)
+            {
+                return gameObjects[position.y * worldSize.x + position.x];
+            }
+            else return null;
+        }
         public void ClearWorld()
         {
 
